@@ -1,22 +1,23 @@
-#include"main.h"
-
+#include <stdio.h>
+#include "main.h"
 /**
- * print_alphabet_x10 - function to write alphabet in lower case x10
+ * print_alphabet_x10 - print alphabet lowercase *10
  *
- * Return : 0
+ * Return: 0
  */
+
 void print_alphabet_x10(void)
 {
-	char i = 'a';
-	int j = 0;
+	int i;
 
-	while (j < 10)
+	for (i = 0; i < 10; i++)
 	{
-		for (i = 'a'; i <= 'z'; i++)
+		char alpha;
+
+		for (alpha = 'a'; alpha <= 'z'; alpha++)
 		{
-			_putchar(i);
+			_putchar(alpha);
 		}
 		_putchar('\n');
-		j++;
 	}
 }
