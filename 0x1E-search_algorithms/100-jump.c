@@ -1,31 +1,36 @@
 #include "search_algos.h"
+#include <math.h>
 
 /**
- * jump_search - shearch using the dictionary technic
- * @array: the list
- * @size: the size of the list
- * @value: the value looking for
- * Return: the index if success -1 when failed
+ * jump_search - searches for a value in a sorted array of int
+ *		using the Jump search algorithm
+ *
+ * @array: array of integers
+ * @size: the size of the array
+ * @value: the value to search for
+ * Return: the first index where value is located
  */
+
 int jump_search(int *array, size_t size, int value)
 {
-	size_t m = (size_t)sqrt(size), i = 0;
+	size_t left, right, jump;
 
-	if (!array)
+	if (array == NULL || size == 0)
 		return (-1);
-	while (i < size && array[i] < value)
+	jump = sqrt(size);
+	left = right = 0;
+	while (array[right] < value && right < size)
 	{
-		printf("Value checked array[%ld] = [%d]\n", i, array[i]);
-		i += m;
+		printf("Value checked array[%ld] = [%d]\n", right, array[right]);
+		left = right;
+		right += jump;
 	}
-	printf("Value found between indexes [%ld] and [%ld]\n", i - m, i);
-	i -= m;
-	while (i < size && array[i] <= value)
-	{
-		printf("Value checked array[%ld] = [%d]\n", i, array[i]);
-		if (array[i] == value)
-			return (i);
-		i++;
-	}
-	return (-1);
+
+	printf("Value found between indexes [%ld] and [%ld]\n", left, right);
+	right = right < size - 1 ? right : size - 1;
+	for (; left < right && array[left] < value; left++)
+		printf("Value checked array[%ld] = [%d]\n", left, array[left]);
+	if (left <= right)
+		printf("Value checked array[%ld] = [%d]\n", left, array[left]);
+	return (array[left] == value ? (int)left : -1);
 }
